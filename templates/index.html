@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Calculadora de Troco</title>
+</head>
+<body>
+
+    <h1><u>Calculadora de Troco</u></h1>
+    <form method="post">
+        <label for="valor_compra">Valor da Compra: </label>
+        <input type="number" name="valor_compra" step="0.01" required><br>
+
+        <label for="valor_pago">Valor Pago: </label>
+        <input type="number" name="valor_pago" step="0.01" required><br>
+
+        <button type="submit">Calcular Troco</button>
+    </form>
+<div class="container">
+    {% if resultado %}
+        <h2>Resultados:</h2>
+        <p>Valor da Compra: R$ {{ resultado['valor_compra'] }}</p>
+        <p>Valor Pago: R$ {{ resultado['valor_pago'] }}</p>
+        <R$>Troco: R$ {{ resultado['troco'] }}</p>
+        <p>Notas do Troco:</p>
+        <ul>
+            {% for nota, quantidade in resultado['notas_troco'].items() %}
+                <li>{{ quantidade }} nota(s) de R$ {{ nota }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+</body>
+</html>
